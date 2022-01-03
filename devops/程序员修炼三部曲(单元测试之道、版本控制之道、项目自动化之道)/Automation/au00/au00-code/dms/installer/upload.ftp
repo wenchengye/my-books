@@ -1,0 +1,4 @@
+user username password
+binary
+cd /server/webapps
+put dms.war

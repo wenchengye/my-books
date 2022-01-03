@@ -1,0 +1,34 @@
+<!--
+  Excerpted from the book, "Pragmatic Project Automation"
+  ISBN 0-9745140-3-9
+  Copyright 2004 The Pragmatic Programmers, LLC.  All Rights Reserved.
+  Visit www.PragmaticProgrammer.com
+ -->
+
+<cruisecontrol>
+  <project name="dms" buildafterfailed="false">
+
+    <bootstrappers>
+      <currentbuildstatusbootstrapper 
+        file="logs/dms/currentbuildstatus.txt" />
+    </bootstrappers>
+
+    <modificationset quietperiod="60">
+      <cvs localworkingcopy="checkout/dms" />
+    </modificationset>
+
+    <schedule interval="60">
+      <ant buildfile="cc-build.xml" target="build" />
+    </schedule>
+
+    <log dir="logs/dms">
+      <merge dir="checkout/dms/build/test-results" />
+    </log>
+
+    <publishers>
+      <currentbuildstatuspublisher 
+        file="logs/dms/currentbuildstatus.txt" />
+    </publishers>
+
+  </project>
+</cruisecontrol>

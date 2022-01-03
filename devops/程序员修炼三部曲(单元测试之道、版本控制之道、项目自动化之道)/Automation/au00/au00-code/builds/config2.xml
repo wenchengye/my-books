@@ -1,0 +1,66 @@
+<!--
+  Excerpted from the book, "Pragmatic Project Automation"
+  ISBN 0-9745140-3-9
+  Copyright 2004 The Pragmatic Programmers, LLC.  All Rights Reserved.
+  Visit www.PragmaticProgrammer.com
+ -->
+
+<cruisecontrol>
+  <project name="dms" buildafterfailed="false">
+
+    <bootstrappers>
+      <currentbuildstatusbootstrapper
+        file="logs/dms/currentbuildstatus.txt" />
+    </bootstrappers>
+
+    <modificationset quietperiod="60">
+      <cvs localworkingcopy="checkout/dms" />
+    </modificationset>
+
+    <schedule interval="60">
+      <ant buildfile="cc-build.xml" target="build" />
+    </schedule>
+
+    <log dir="logs/dms">
+      <merge dir="checkout/dms/build/test-results" />
+    </log>
+
+    <publishers>
+      <currentbuildstatuspublisher file="logs/dms/currentbuildstatus.txt" />
+
+      <htmlemail mailhost="your.smtp.host"
+        returnaddress="cruisecontrol@clarkware.com" 
+        defaultsuffix="@clarkware.com" 
+        buildresultsurl="http://localhost:8080/cruisecontrol/buildresults/dms" 
+        css="/Users/mike/tools/cruisecontrol/reporting/jsp/css/cruisecontrol.css"
+        xsldir="/Users/mike/tools/cruisecontrol/reporting/jsp/xsl" 
+        logdir="logs/dms">
+
+        <map alias="manager" address="bigcheese@clarkware.com" />
+        <map alias="mike" address="mike@clarkware.com" />
+        <map alias="fred" address="fred@somewhere.com" />
+
+        <always address="manager" />
+        <failure address="mike" reportWhenFixed="true" />
+        <failure address="fred" reportWhenFixed="true" />
+
+      </htmlemail>
+
+      <email mailhost="your.smtp.host"
+        returnaddress="cruisecontrol@clarkware.com" 
+        buildresultsurl="">
+
+        <map alias="fred" address="3035551212@mobile.att.net" />
+        <failure address="fred" reportWhenFixed="true" />
+
+      </email>
+
+      <XSLTLogPublisher
+        directory="/Library/WebServer/Documents"
+        outfilename="dmsbuildstatus.rss"
+        xsltfile="buildstatus.xsl" />
+
+    </publishers>
+
+  </project>
+</cruisecontrol>

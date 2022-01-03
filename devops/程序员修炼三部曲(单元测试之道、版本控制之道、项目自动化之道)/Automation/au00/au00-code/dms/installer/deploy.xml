@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+  Excerpted from the book, "Pragmatic Project Automation"
+  ISBN 0-9745140-3-9
+  Copyright 2004 The Pragmatic Programmers, LLC.  All Rights Reserved.
+  Visit www.PragmaticProgrammer.com
+ -->
+
+
+<project name="dms" default="hot-deploy" basedir=".">
+  
+  <description>
+    Deploys DMS into Tomcat.
+  </description>
+  
+  <property environment="env" />
+  <property file="tomcat.properties" />
+
+  <property name="webapp.name"  value="tdd"/>
+  <property name="warfile.path" location="../dist/tdd.war"/>
+
+  <property name="tomcat.home"  value="${env.TOMCAT_HOME}"/>
+  <property name="tomcat.manager.username" value="admin" />
+  <property name="tomcat.manager.password" value="admin" />
+  <property name="tomcat.server"           value="localhost"/>  
+  <property name="tomcat.manager.url"
+    value="http://${tomcat.server}:8080/manager"/>  
+  <property name="webapp.url"   
+    value="http://${tomcat.server}:8080/${webapp.name}"/>
+  
+  <taskdef file="tomcat-tasks.properties">
+    <classpath>
+      <pathelement path="${tomcat.home}/server/lib/catalina-ant.jar"/>
+    </classpath> 
+  </taskdef>
+
+
+  <target name="hot-deploy" depends="stop, undeploy, deploy, start" />
+
+  <target name="hot-deploy-wait" depends="stop, undeploy, deploy, start">
+    <sleep seconds="2"/>
+    <waitfor maxwait="30" maxwaitunit="second" 
+      timeoutproperty="not.available"> 
+      <http url="${webapp.url}" />
+    </waitfor>
+    <fail if="not.available">No server found at ${webapp.url}!</fail>
+    <echo>Successfully deployed to ${webapp.url}!</echo>
+  </target>
+  
+  <target name="deploy">
+    <deploy url="${tomcat.manager.url}"
+      username="${tomcat.manager.username}"
+      password="${tomcat.manager.password}"
+      path="/${webapp.name}"
+      war="file:${warfile.path}"/>
+  </target>
+
+  <target name="start">
+    <start url="${tomcat.manager.url}"
+       username="${tomcat.manager.username}"
+       password="${tomcat.manager.password}"
+       path="/${webapp.name}"/>
+  </target>
+
+  <target name="stop">
+    <stop url="${tomcat.manager.url}"
+      username="${tomcat.manager.username}"
+      password="${tomcat.manager.password}"
+      path="/${webapp.name}"/>
+  </target>
+
+  <target name="undeploy">
+    <undeploy url="${tomcat.manager.url}"
+      username="${tomcat.manager.username}"
+      password="${tomcat.manager.password}"
+      path="/${webapp.name}"/>
+  </target>
+
+  <target name="reload">
+    <reload url="${tomcat.manager.url}"
+      username="${tomcat.manager.username}"
+      password="${tomcat.manager.password}"
+      path="/${webapp.name}"/>
+  </target>
+
+  <target name="list">
+    <list url="${tomcat.manager.url}"
+      username="${tomcat.manager.username}"
+      password="${tomcat.manager.password}" />
+  </target>
+
+  <target name="get">
+    <get src="${tomcat.manager.url}/list" 
+         dest="status.txt"
+         username="${tomcat.manager.username}"
+         password="${tomcat.manager.password}" />
+  </target>
+
+</project>

@@ -1,0 +1,55 @@
+
+                   DOCUMENT MANAGEMENT SYSTEM (DMS) 
+
+
+  What's Here?
+  ---------------
+
+  Welcome to the cutting-edge world of indexing and searching 
+  HTML documents.
+
+
+  System Requirements
+  -------------------
+
+  * Java 1.4.x or higher
+
+
+  Getting Started
+  ---------------
+
+  0. Make sure your current working directory is the directory
+     containing this file (we'll call it DMS_HOME).
+
+  1. Index the example documents in the 'doc' directory:
+
+      Unix
+      ----
+      > sh bin/indexAll.sh
+
+      Windows
+      -------
+      > bin/indexAll.bat
+
+  2. Run an example search:
+
+      Unix
+      ----
+      > sh bin/search.sh people
+
+      Windows
+      -------
+      > bin/search.bat people
+
+  3. Index your own HTML document, for example:
+
+      Unix
+      ----
+      > sh bin/index.sh ~/mydocs/index.html
+
+      Windows
+      -------
+      > bin/index.sh ~/mydocs/index.html
+
+
+  We hope this automation gives you more time to enjoy life!

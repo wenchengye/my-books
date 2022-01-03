@@ -1,0 +1,8 @@
+Prerequisites: 
+  * Java Servlet API v2.3 (javax.servlet.jar)
+
+Building:
+  sh build.sh
+
+More Info:
+  "Pragmatic Project Automation"

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Excerpted from the book, "Pragmatic Project Automation"
+  ISBN 0-9745140-3-9
+  Copyright 2004 The Pragmatic Programmers, LLC.  All Rights Reserved.
+  Visit www.PragmaticProgrammer.com
+ -->
+
+<rss version="2.0">
+<channel>
+<title>      
+          DMS Build Status 
+        </title>
+<link>
+          http://localhost:8080/cruisecontrol 
+        </link>
+<description>
+          CruiseControl build status feed for the DMS project.
+        </description>
+<item>
+<title>
+              Build Succeeded
+            </title>
+<link>
+            http://localhost:8080/cruisecontrol/buildresults/dms</link>
+<description>
+              &lt;b&gt;Build:&lt;/b&gt; 
+              build.6
+
+	    &lt;br/&gt;
+	    &lt;br/&gt;
+
+            &lt;b&gt;Date of build:&lt;/b&gt; 
+	    06/07/2004 16:19:20&lt;br/&gt;
+            
+	    &lt;b&gt;Time to build:&lt;/b&gt; 
+	    8 seconds&lt;br/&gt;
+	    
+            
+      
+      &lt;br/&gt;
+
+      &lt;b&gt;Last changed:&lt;/b&gt; 
+      06/07/2004 16:18:20&lt;br/&gt;
+     
+      &lt;b&gt;Last changed by:&lt;/b&gt; 
+      mike&lt;br/&gt;
+       
+      &lt;b&gt;Last log entry:&lt;/b&gt; 
+      *** empty log message ***&lt;br/&gt;
+    
+    
+	
+	    &lt;br/&gt;
+
+	    &lt;b&gt;Unit Tests:&lt;/b&gt;
+	    4</description>
+</item>
+</channel>
+</rss>
